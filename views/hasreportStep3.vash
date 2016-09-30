@@ -1,0 +1,54 @@
+@html.extend('govuklayout', function(model) {
+
+  @html.block("body", function (model) {
+
+  <main id="content" role="main">
+
+  <div class="phase-banner">
+    <p>
+      <strong class="phase-tag">ALPHA</strong>
+      <span>Health and Safety reporting tool is a new service – your <a href="https://designpatterns.hackpad.com/GOV.UK-elements-feedback-sKrDyQxcfA2">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">GOV.UK Health and Safety Reporting Service</span>
+    Capture new heath and safety issue
+  </h1>
+  <p class="lede text">
+    Whats the problem?
+  </p>
+  <form action="/hasreportStep3" method="POST">
+    <div class="form-group">
+      <fieldset>
+        <legend class="visuallyhidden">Where do you live?</legend>
+        <div class="form-group">
+          <label class="form-label" for="incidentType">Incident type</label>
+          <span class="form-hint">Select the category that best describes your incident.</span>
+          <select class="form-control" id="incidentType" name="incidentType">
+            <option>Yam has bosted something, a'it</option>
+            <option>There is a massive hole openned up in the road</option>
+            <option>A UFO has landed on my roof</option>
+          </select>
+        </div>        
+          <div class="form-group">
+          <label class="form-label" for="problemReport">
+            Problem
+            <span class="form-hint">Give us a breif summary of the problem.</span>
+          </label>
+          <textarea class="form-control" id="textarea-a" id="problemReport" name="problemReport" cols="30" rows="10"></textarea>
+        </div>        
+      </fieldset>
+    </div>
+      <input class="button" type="submit" value="Save and continue">
+      <input id="firstname" name="firstname" type="hidden" value="@model.firstName">
+      <input id="lastname" name="lastname" type="hidden" value="@model.lastName">
+      <input id="region" name="region" type="hidden" value="@model.region">
+  </form>
+
+   </main>
+})
+    
+
+
+})

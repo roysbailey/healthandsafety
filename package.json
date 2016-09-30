@@ -1,0 +1,21 @@
+{
+  "name": "HealthAndSafetyReporter",
+  "version": "0.1.0",
+  "description": "Health and safety incident reporter.",
+  "main": "server.js",
+  "author": {
+    "name": "Roy Bailey",
+    "email": "roysbailey@passport.com"
+  },
+  "dependencies": {
+    "azure-storage": "^1.3.1",
+    "body-parser": "^1.15.2",
+    "express": "~3.4.8",
+    "node-rest-client": "^1.5.1",
+    "vash": "~0.7.7"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-nodemon": "~0.2.0"
+  }
+}

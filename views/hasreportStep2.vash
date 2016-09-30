@@ -1,0 +1,57 @@
+@html.extend('govuklayout', function(model) {
+
+  @html.block("body", function (model) {
+
+  <main id="content" role="main">
+
+  <div class="phase-banner">
+    <p>
+      <strong class="phase-tag">ALPHA</strong>
+      <span>Health and Safety reporting tool is a new service – your <a href="https://designpatterns.hackpad.com/GOV.UK-elements-feedback-sKrDyQxcfA2">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">GOV.UK Health and Safety Reporting Service</span>
+    Capture new heath and safety issue
+  </h1>
+  
+  <p class="lede text">
+    Where are you based?
+  </p>
+  <form action="/hasreportStep2" method="POST">
+    <div class="form-group">
+      <fieldset>
+
+        <legend class="visuallyhidden">Where do you live?</legend>
+
+        <label class="block-label" for="uk">
+          <input id="uk" type="radio" name="locationSelection" value="United Kingdom">
+          United Kingdom
+        </label>
+        <label class="block-label" for="pjobs">
+          <input id="pjobs" type="radio" name="locationSelection" value="PJOBS">
+          PJOBS
+        </label>
+        <label class="block-label" for="Germany">
+          <input id="Germany" type="radio" name="locationSelection" value="Germany">
+          Germany
+        </label>
+        <p class="form-block">or</p>
+        <label class="block-label" for="Other">
+          <input id="Other" type="radio" name="locationSelection" value="Overseas - other">
+          Overseas - other
+        </label>
+      </fieldset>
+    </div>
+      <input class="button" type="submit" value="Save and continue">
+      <input id="firstname" name="firstname" type="hidden" value="@model.firstName">
+      <input id="lastname" name="lastname" type="hidden" value="@model.lastName">
+  </form>
+
+   </main>
+})
+    
+
+
+})

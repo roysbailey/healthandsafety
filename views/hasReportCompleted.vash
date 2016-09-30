@@ -1,0 +1,68 @@
+@html.extend('govuklayout', function(model) {
+
+  @html.block("body", function (model) {
+
+  <main id="content" role="main">
+
+  <div class="phase-banner">
+    <p>
+      <strong class="phase-tag">ALPHA</strong>
+      <span>Health and Safety reporting tool is a new service – your <a href="https://designpatterns.hackpad.com/GOV.UK-elements-feedback-sKrDyQxcfA2">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">GOV.UK Health and Safety Reporting Service</span>
+    Health and Safety Incident Reported...
+  </h1>
+  
+  <p class="lede text">
+    Thank you, your report has been submitted, your reference is @model.incidentID.
+  </p>
+  <form action="/hasreportStep3" method="POST">
+    <div class="form-group">
+      <fieldset>
+        <legend class="visuallyhidden">Here is a summary of your report</legend>
+        <div class="form-group">
+          <label class="form-label" for="firstname">First name</label>
+          <input class="form-control" id="firstname" name="firstname" disabled type="text" value="@model.firstName">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastname">Last name</label>
+          <input class="form-control" id="lastname" name="lastname" disabled type="text" value="@model.lastName">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="region">Region</label>
+          <input class="form-control" id="region" name="region" disabled type="text" value="@model.region">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="incidentType">Incident type</label>
+          <input class="form-control" id="incidentType" name="incidentType" disabled type="text" value="@model.incidentType">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="problemReport">Problem Report</label>
+          <textarea class="form-control" id="textarea-a" id="problemReport" name="problemReport" disabled cols="30" rows="10">@model.problemReport</textarea>
+        </div>
+      </fieldset>
+    </div>
+    <div class="notice">
+      <i class="icon icon-important">
+        <span class="visuallyhidden">Warning</span>
+      </i>
+      <strong class="bold-small">
+        What happens next?
+      </strong>
+    </div>
+      <div class="panel panel-border-wide">
+      <p>
+        Your report will be reviewed within 24 hours and one of our representatives will contact you for additional information should this be required.
+      </p>
+    </div>
+    
+  <a class="button button-start" href="/" role="button">Submit another incident</a>
+  </form>
+
+   </main>
+})
+    
+})
