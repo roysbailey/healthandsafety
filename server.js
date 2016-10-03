@@ -10,6 +10,10 @@ app.set("view engine", "vash");
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser());
 
+// Enable server side sessions
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
+
 // set the public static resource folder
 app.use(express.static(__dirname + "/public"));
 
