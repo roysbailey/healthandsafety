@@ -1,7 +1,7 @@
 (function (hasReportController) {
 
     var azureStorage = require('azure-storage');
-
+    var incidentQueryService = require("../services/incidentQueryService");
 
   hasReportController.init = function (app) {
 
@@ -73,6 +73,18 @@
         res.render("hasReportCompleted", model);
     });
 
+    app.get("/admin/submissions", function (req, res) {
+        res.render("submissions", { title: "Select a location?" });
+    });
+
+    app.post("/admin/submissions", function (req, res) {
+        console.log("region selected: " + req.body.region);
+
+        incidentQueryService.GetIncidentsByLocation(req.body.region).then(values => {
+            console.log("Loaded all values... " + values);
+            res.render("submissions", { title: "Select a location?", incidents: values, region: req.body.region });
+        });
+    });
 
   };
 

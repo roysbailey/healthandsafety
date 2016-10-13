@@ -4,6 +4,11 @@ var bodyParser = require("body-parser");
 var app = express();
 var controllers = require("./controllers");
 
+// var incidentQueryService = require("./services/incidentQueryService");
+//     incidentQueryService.GetIncidentsByLocation("PJOBS").then(values => {
+//         console.log("Loaded all values... " + values);
+//     });
+
 // Setup the View Engine
 app.set("view engine", "vash");
 

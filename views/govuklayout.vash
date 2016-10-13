@@ -93,6 +93,7 @@
         <ul id="proposition-links">
           <li><a href="https://www.gov.uk/service-manual/digital-by-default">Digital by Default Service Standard</a></li>
           <li><a href="https://www.gov.uk/contact/govuk">Let us know what you think</a></li>
+          <li><a href="/admin/submissions">Admin</a></li>
         </ul>
       </nav>
     </div>

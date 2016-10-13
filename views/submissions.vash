@@ -1,0 +1,69 @@
+@html.extend('govuklayout', function(model) {
+
+  @html.block("body", function (model) {
+
+  <main id="content" role="main">
+
+  <div class="phase-banner">
+    <p>
+      <strong class="phase-tag">ALPHA</strong>
+      <span>Health and Safety reporting tool is a new service – your <a href="https://designpatterns.hackpad.com/GOV.UK-elements-feedback-sKrDyQxcfA2">feedback</a> will help us to improve it.</span>
+    </p>
+  </div>
+
+  <h1 class="heading-xlarge">
+    <span class="heading-secondary">GOV.UK Health and Safety Incident Reporting Service</span>
+    Report on submitted incidents
+  </h1>
+  
+  <p class="lede text">
+    Select a region to report on
+  </p>
+  <form method="POST">
+    <div class="form-group">
+      <label class="form-label" for="select-box">Region</label>
+      <select class="form-control" name="region" id="region">
+        <option>United Kingdom</option>
+        <option @(model.region === 'Germany' ? 'selected' : '')>Germany</option>
+        <option @(model.region === 'PJOBS' ? 'selected' : '')>PJOBS</option>
+        <option @(model.region === 'Overseas - other' ? 'selected' : '')>Overseas - other</option>
+      </select>    
+      </div>
+      <input class="button" type="submit" value="Search">
+  </form>
+
+  @{
+    var hasIncidents = false;
+    var matches = 0;
+    if (model.incidents) {
+       matches = model.incidents.length;
+      hasIncidents = matches == true;
+    } 
+  }
+
+  @if(model.incidents) {
+      <table>
+        <thead>
+          <tr>
+            <th colspan="4">Results for [@model.region] matched @matches incidents</th>
+          </tr>
+        </thead>
+        <tbody>
+	          @model.incidents.forEach(function(m) {
+            <tr>
+              <td>@m.ID</td>
+              <td>@m.name</td>
+              <td>@m.incidentType</td>
+              <td>@m.created</td>
+            </tr>
+            })
+        </tbody>
+      </table>
+    }
+
+   </main>
+})
+    
+
+
+})
