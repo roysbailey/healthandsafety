@@ -15,7 +15,8 @@ var config = require("./config");
             headers: standardGetHeader()
             };
 
-            var incidentQueryUri = config.incidentQueryUri.replace("{0}", location); 
+            var incidentQueryUri = config.incidentQueryUri.replace("{0}", location);
+            console.log("Query Uri: " + incidentQueryUri); 
             client.get(incidentQueryUri, args, (data, response) => {
                 console.log("RAW BODY response from query by region: " + data);
                 results = data['rdfs:member'];
