@@ -16,9 +16,9 @@ var config = require("./config");
             };
 
             var incidentQueryUri = config.incidentQueryUri.replace("{0}", location);
-            console.log("Query Uri: " + incidentQueryUri); 
+            console.log("Query Uri: " + incidentQueryUri) + " header: " + args.headers.Authorization; 
             client.get(incidentQueryUri, args, (data, response) => {
-                console.log("RAW BODY response from query by region: " + data);
+                console.log("RAW BODY response from query by region: " + JSON.stringify(data));
                 results = data['rdfs:member'];
                 console.log("Retrived incidents: " + results);                
 
