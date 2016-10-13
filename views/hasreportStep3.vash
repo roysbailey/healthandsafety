@@ -26,9 +26,10 @@
           <label class="form-label" for="incidentType">Incident type</label>
           <span class="form-hint">Select the category that best describes your incident.</span>
           <select class="form-control" id="incidentType" name="incidentType">
-            <option>Yam has bosted something, a'it</option>
-            <option>There is a massive hole openned up in the road</option>
-            <option>A UFO has landed on my roof</option>
+            <option>Near miss</option>
+            <option>Minor injury</option>
+            <option>Major injury</option>
+            <option>Fatality</option>
           </select>
         </div>        
           <div class="form-group">
