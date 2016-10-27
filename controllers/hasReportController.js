@@ -1,5 +1,6 @@
 (function (hasReportController) {
 
+    var config = require('../services/config');
     var azureStorage = require('azure-storage');
     var incidentQueryService = require("../services/incidentQueryService");
 
@@ -80,11 +81,33 @@
     app.post("/admin/submissions", function (req, res) {
         console.log("region selected: " + req.body.region);
 
-        incidentQueryService.GetIncidentsByLocation(req.body.region).then(values => {
+        Promise.all([incidentQueryService.getLastPollDate(), incidentQueryService.GetIncidentsByLocation(req.body.region)])
+        .then(allResults => {
+            console.log(allResults);
+            var lastReadViewUpdateDateTime = allResults[0]; 
+            var values = allResults[1];
+            //var lastReadViewUpdateDateTime = "2016-10-25T07:54:23.092Z";
             console.log("Loaded all values... " + values);
-            res.render("submissions", { title: "Select a location?", incidents: values, region: req.body.region });
+            var readViewStaleState = seeIfReadViewStale(lastReadViewUpdateDateTime);
+            console.log("ReadViewStaleState... " + readViewStaleState);
+            res.render("submissions", { title: "Select a location?", incidents: values, region: req.body.region, readViewStaleState: readViewStaleState, lastReadViewUpdateDateTime: convertDateTimeToEngland(lastReadViewUpdateDateTime) });            
         });
     });
+
+    function seeIfReadViewStale(lastReadViewUpdateDateTime) {
+        var now = new Date();
+        var lastUdate = new Date(lastReadViewUpdateDateTime);
+        var outOfDateInSeconds = (now - lastUdate) / 1000;
+
+        return outOfDateInSeconds > config.staleReadViewThresholdSeconds ? "Stale" : "OK";
+    }
+
+    function convertDateTimeToEngland(inputFormat) {
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/') + " at " + 
+           [pad(d.getHours()), pad(d.getMinutes() + 1), d.getSeconds()].join(':') ;
+    }    
 
   };
 
