@@ -16,12 +16,20 @@
     Capture new heath and safety issue
   </h1>
   <p class="lede text">
-    Whats the problem?
+    Tell us abou the incident?
   </p>
   <form action="/hasreportStep3" method="POST">
     <div class="form-group">
       <fieldset>
-        <legend class="visuallyhidden">Where do you live?</legend>
+        <legend class="visuallyhidden">What type of incident was it?</legend>
+        <div class="form-group">
+          <label class="form-label" for="casualty">Casualty name</label>
+          <input class="form-control" id="casualty" name="casualty" type="text">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="incidentDate">Incident date</label>
+          <input class="form-control" id="incidentDate" name="incidentDate" type="text">
+        </div>
         <div class="form-group">
           <label class="form-label" for="incidentType">Incident type</label>
           <span class="form-hint">Select the category that best describes your incident.</span>

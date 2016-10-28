@@ -3,6 +3,7 @@
     var config = require('../services/config');
     var azureStorage = require('azure-storage');
     var incidentQueryService = require("../services/incidentQueryService");
+    IncidentModel = require('../models/IncidentModel');
 
   hasReportController.init = function (app) {
 
@@ -35,14 +36,9 @@
 
     app.post("/hasreportStep3", function (req, res) {
 
-        var model = {
-            firstName: req.body.firstname,
-            lastName: req.body.lastname,
-            region: req.body.region,
-            problemReport: req.body.problemReport,
-            incidentType: req.body.incidentType,
-            incidentID: Math.floor((Math.random() * 1000) + 1)
-        };
+        var model = new IncidentModel(req.body.region, req.body.incidentDate, 
+            req.body.casualty, req.body.incidentType, req.body.firstname + ' ' + req.body.lastname, 
+            req.body.problemReport, 'Submitted');
 
         var connectionString = process.env.AzureProcessingQueueConnection;
         var queueSvc = azureStorage.createQueueService(connectionString);
@@ -56,16 +52,7 @@
 
                 queueSvc.createMessage('has-incidents', jsonModelBase64, function(error, result, response){
                     if(!error){
-
-
-                        // queueSvc.getMessages('has-incidents', function(error, result, response){
-                        // if(!error){
-                        //     // Message text is in messages[0].messageText
-                        //     var message = result[0];
-                        // }
-                        // });
-
-                        
+                        console.log("Error prosting message: " + error);
                     }
                 });
             }
