@@ -51,7 +51,7 @@
                 var jsonModelBase64 = buffer.toString('base64');
 
                 queueSvc.createMessage('has-incidents', jsonModelBase64, function(error, result, response){
-                    if(!error){
+                    if(error){
                         console.log("Error prosting message: " + error);
                     }
                 });
