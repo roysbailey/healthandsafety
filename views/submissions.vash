@@ -23,7 +23,7 @@
     <div class="form-group">
       <label class="form-label" for="select-box">Region</label>
       <select class="form-control" name="region" id="region">
-        <option>United Kingdom</option>
+        <option>UK</option>
         <option @(model.region === 'Germany' ? 'selected' : '')>Germany</option>
         <option @(model.region === 'PJOBS' ? 'selected' : '')>PJOBS</option>
         <option @(model.region === 'Overseas - other' ? 'selected' : '')>Overseas - other</option>
@@ -51,10 +51,10 @@
         <tbody>
 	          @model.incidents.forEach(function(m) {
             <tr>
-              <td>@m.ID</td>
-              <td>@m.name</td>
-              <td>@m.incidentType</td>
-              <td>@m.created</td>
+              <td>@m.IncidentID</td>
+              <td>@m.casualty</td>
+              <td>@m.incidentClass</td>
+              <td>@m.incidentDate</td>
               <td><div class=@(m.status === 'Approved' ? 'swatch-error' : 'swatch-black') style="color: #fff; text-align: center;">@m.status</div></td>
             </tr>
             })

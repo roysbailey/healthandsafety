@@ -37,7 +37,7 @@ var config = require("./config");
                     console.log("Query succeeded.");
                     data.Items.forEach((item) => {
                         console.log(" -", item.IncidentID + ": " + item.Region);
-                        results.push(mapModelToDTO(item));
+                        results.push(item);
                     });
 
                     resolve(results);
@@ -160,20 +160,20 @@ var config = require("./config");
     //     return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
     // }
         
-    function mapModelToDTO(incidentModel) {
-        var dto =
-        {
-            "ID": incidentModel.IncidentID,
-            "problemReport": incidentModel.problemReport,
-            "incidentType": incidentModel.incidentType,
-            "region":incidentModel.Region,
-            "name":  incidentModel.nameOfSubmitter, 
-            "created": incidentModel.createdDateTime,
-            "status": incidentModel.status,
-        }
+    // function mapModelToDTO(incidentModel) {
+    //     var dto =
+    //     {
+    //         "ID": incidentModel.IncidentID,
+    //         "problemReport": incidentModel.problemReport,
+    //         "incidentType": incidentModel.incidentType,
+    //         "region":incidentModel.Region,
+    //         "name":  incidentModel.nameOfSubmitter, 
+    //         "created": incidentModel.createdDateTime,
+    //         "status": incidentModel.status,
+    //     }
 
-        return dto;
-    }    
+    //     return dto;
+    // }    
 
 
 })(module.exports);
