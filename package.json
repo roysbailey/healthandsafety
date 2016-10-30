@@ -20,5 +20,8 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-nodemon": "~0.2.0"
+  },
+  "engines": {
+    "node": "6.7.0"
   }
 }
