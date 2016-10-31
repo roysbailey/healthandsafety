@@ -39,8 +39,8 @@
         </label>
         <p class="form-block">or</p>
         <label class="block-label" for="Other">
-          <input id="Other" type="radio" name="locationSelection" value="Overseas - other">
-          Overseas - other
+          <input id="Other" type="radio" name="locationSelection" value="Rest of world">
+          Rest of world
         </label>
       </fieldset>
     </div>

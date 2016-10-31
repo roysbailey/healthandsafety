@@ -26,7 +26,7 @@
         <option>UK</option>
         <option @(model.region === 'Germany' ? 'selected' : '')>Germany</option>
         <option @(model.region === 'PJOBS' ? 'selected' : '')>PJOBS</option>
-        <option @(model.region === 'Overseas - other' ? 'selected' : '')>Overseas - other</option>
+        <option @(model.region === 'Rest of world' ? 'selected' : '')>Rest of world</option>
       </select>    
       </div>
       <input class="button" type="submit" value="Search">
