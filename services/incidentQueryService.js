@@ -12,6 +12,34 @@ var config = require("./config");
     const dynamodb = new AWS.DynamoDB();
 
 
+    incidentQueryService.GetAllIncidents = () => {
+        return new Promise( function pr(resolve,reject) {
+
+            var docClient = new AWS.DynamoDB.DocumentClient();
+            var results = [];
+
+            var params = {
+                TableName : "HealthAndSafetyIncidents"
+            };
+
+            docClient.scan(params, function(err, data) {
+                if (err) {
+                    console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+                    reject(err);
+                } else {
+                    console.log("GetAllIncidents succeeded.");
+                    data.Items.forEach((item) => {
+                        console.log(" -", item.IncidentID + ": " + item.Region);
+                        results.push(item);
+                    });
+
+                    resolve(results);
+                }
+            });
+
+        });
+    }
+
     incidentQueryService.GetIncidentsByLocation = (region) => {
         return new Promise( function pr(resolve,reject) {
 
