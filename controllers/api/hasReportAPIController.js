@@ -1,6 +1,8 @@
 var https = require("https");
 require('array.prototype.find').shim();
 var os = require("os");
+var incidentQueryService = require("../../services/incidentQueryService");
+
 
 (function (hasReportAPIController) {
 
@@ -28,23 +30,16 @@ var os = require("os");
 
     app.get("/api/hasincidents", function (req, resp) {
     
-      var incidents = req.session.incidents;
-      resp.set("Content-Type", "application/json");
-      resp.send(incidents);
+      incidentQueryService.GetAllIncidents()
+      .then(data => {
+        resp.set("Content-Type", "application/json");
 
-      // var RestClient = require('node-rest-client').Client;
-      // var client = new RestClient();
-      // var args = {
-      //   headers:{"Authorization": process.env.CH_BASIC_AUTH} 
-      // };
-    
-      // // Call companies house  
-      // client.get("https://api.companieshouse.gov.uk/search/companies?q=" + req.query.q, args, function(data, response){
-        
-      //   // Return the data from companies house back to our client UI
-      //   resp.set("Content-Type", "application/json");
-      //   resp.send(data);
-      // });
+        // Enable CORS, so an ionic app can make calls to the api.
+        resp.header('Access-Control-Allow-Origin', '*');
+        resp.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        resp.header('Access-Control-Allow-Headers', 'Content-Type');        
+        resp.send(data);
+      });
     });
 
     app.post("/api/hasincidents", function (req, resp) {
