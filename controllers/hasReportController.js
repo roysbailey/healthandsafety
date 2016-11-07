@@ -1,8 +1,8 @@
 (function (hasReportController) {
 
     var config = require('../services/config');
-    var azureStorage = require('azure-storage');
     var incidentQueryService = require("../services/incidentQueryService");
+    var incidentSubmissionService = require("../services/incidentSubmissionService");
     IncidentModel = require('../models/IncidentModel');
 
   hasReportController.init = function (app) {
@@ -15,11 +15,6 @@
 
         var firstName = req.body.firstname;
         var lastName = req.body.lastname;
-
-        // res.writeHead(302, {
-        //     'Location': '/hasreportStep2'
-        //     });
-        // res.end();
 
         res.render("hasreportStep2", { firstName: firstName, lastName: lastName});
     });
@@ -36,29 +31,16 @@
 
     app.post("/hasreportStep3", function (req, res) {
 
+        // Format as an incident model
         var model = new IncidentModel(req.body.region, req.body.incidentDate, 
             req.body.casualty, req.body.incidentType, req.body.firstname + ' ' + req.body.lastname, 
             req.body.problemReport, 'Submitted');
 
-        var connectionString = process.env.AzureProcessingQueueConnection;
-        var queueSvc = azureStorage.createQueueService(connectionString);
-        queueSvc.createQueueIfNotExists('has-incidents', function(error, result, response){
-            if(!error){
-                // Azure storage queues excpect base64 encoding (specifically the tools like storage explorer).
-                // http://www.codingdefined.com/2015/07/how-to-encode-string-to-base64-in-nodejs.html
-                var jsonModel = JSON.stringify( model );
-                var buffer = new Buffer(jsonModel);
-                var jsonModelBase64 = buffer.toString('base64');
-
-                queueSvc.createMessage('has-incidents', jsonModelBase64, function(error, result, response){
-                    if(error){
-                        console.log("Error prosting message: " + error);
-                    }
-                });
-            }
-        });
-
-        res.render("hasReportCompleted", model);
+        // Post the incident for processing by the back end.
+        incidentSubmissionService.submitIncidentForProcessing(model)
+        .then(() => {
+            res.render("hasReportCompleted", model);
+        });;
     });
 
     app.get("/admin/submissions", function (req, res) {
