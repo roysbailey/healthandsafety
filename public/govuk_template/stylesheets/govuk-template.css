@@ -341,7 +341,7 @@ button:focus,
       float: left; }
       @media (min-width: 769px) {
         #global-header .header-wrapper .header-global .header-logo {
-          width: 33.33%; } }
+          width: 20%; } }
       @media screen and (max-width: 379px) {
         #global-header .header-wrapper .header-global .header-logo {
           width: auto;
@@ -353,13 +353,13 @@ button:focus,
   @media (min-width: 769px) {
     #global-header.with-proposition .header-wrapper .header-global {
       float: left;
-      width: 33.33%; }
+      width: 20%; }
       #global-header.with-proposition .header-wrapper .header-global .header-logo,
       #global-header.with-proposition .header-wrapper .header-global .site-search {
         width: 100%; } }
   @media (min-width: 769px) {
     #global-header.with-proposition .header-wrapper .header-proposition {
-      width: 66.66%;
+      width: 80%;
       float: left; } }
   #global-header.with-proposition .header-wrapper .header-proposition .content {
     margin: 0 15px; }
