@@ -80,8 +80,8 @@
       <div class="header-wrapper">
         <div class="header-global">
           <div class="header-logo">
-            <a href="https://www.gov.uk" title="Go to the GOV.UK homepage" id="logo" class="content">
-              <img src="/public/images/gov.uk_logotype_crown_invert_trans.png?0.15.1" width="35" height="31" alt=""> GOV.UK
+            <a href="/" title="Go to the GOV.UK homepage" class="content">
+              <img src="/govuk_template/images/gov.uk_logotype_crown_invert_trans.png" width="162" height="90" alt="">
             </a>
           </div>
         </div>
@@ -89,10 +89,12 @@
     <div class="content">
       <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
       <nav id="proposition-menu">
-        <a href="https://www.gov.uk/service-manual" id="proposition-name">Government Health and Safety Reporting Service</a>
+        <a href="https://www.gov.uk/service-manual" id="proposition-name">Health and Safety Recording – User Experience Research Demo</a>
         <ul id="proposition-links">
           <li><a href="https://www.gov.uk/service-manual/digital-by-default">Digital by Default Service Standard</a></li>
           <li><a href="https://www.gov.uk/contact/govuk">Let us know what you think</a></li>
+        </ul>
+        <ul id="proposition-links">
           <li><a href="/admin/submissions">Admin</a></li>
         </ul>
       </nav>
