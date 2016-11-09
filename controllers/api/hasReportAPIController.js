@@ -78,7 +78,8 @@ IncidentModel = require('../../models/IncidentModel');
           resp.header('Access-Control-Allow-Origin', '*');
           resp.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
           resp.header('Access-Control-Allow-Headers', 'Content-Type');        
-          resp.send();
+          resp.header('Content-Type', 'application/json');        
+          resp.send(JSON.stringify( model ));
         });;
     });
     
