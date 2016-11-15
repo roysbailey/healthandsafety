@@ -7,6 +7,9 @@
     "name": "Roy Bailey",
     "email": "roysbailey@passport.com"
   },
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "array.prototype.find": "^2.0.0",
     "aws-sdk": "^2.6.12",

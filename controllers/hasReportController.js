@@ -40,7 +40,10 @@
         incidentSubmissionService.submitIncidentForProcessing(model)
         .then(() => {
             res.render("hasReportCompleted", model);
-        });;
+        })
+        .catch((error) => {
+            console.log("Error submittig incident" + error);
+        });
     });
 
     app.get("/admin/submissions", function (req, res) {

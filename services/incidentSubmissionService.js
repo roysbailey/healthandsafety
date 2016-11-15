@@ -3,6 +3,8 @@ var azureStorage = require('azure-storage');
 (function (incidentSubmissionService) {
     incidentSubmissionService.submitIncidentForProcessing = (incident) => {
         return new Promise( function pr(resolve,reject) {
+            dumpEnv();
+            
             var connectionString = process.env.AzureProcessingQueueConnection;
             var queueSvc = azureStorage.createQueueService(connectionString);
             queueSvc.createQueueIfNotExists('has-incidents', function(error, result, response){
@@ -15,15 +17,23 @@ var azureStorage = require('azure-storage');
 
                     queueSvc.createMessage('has-incidents', jsonModelBase64, function(error, result, response){
                         if(error){
-                            console.log("Error prosting message: " + error);
+                            console.log("Error prosting message (createMessage): " + error);
                             reject(error);
                         } else {
                             resolve();
                         }
                     });
+                } else {
+                    console.log("Error prosting message (createQueueIfNotExists): " + error);
+                    reject(error);
                 }
             });
         });
     }
+
+function dumpEnv() {
+    console.log("Environemnt...");
+    console.log(process.env);
+}
 
 })(module.exports);
