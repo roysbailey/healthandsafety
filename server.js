@@ -38,4 +38,16 @@ controllers.init(app);
 
 var server = http.createServer(app);
 
-server.listen(process.env.PORT || 3000);
+var port = process.env.PORT || 3000;
+console.log("Running on port A: " + process.env.PORT);
+console.log("Running on port: " + port);
+
+dumpEnv();
+
+server.listen(port);
+
+
+function dumpEnv() {
+    console.log("Environemnt...");
+    console.log(process.env);
+}

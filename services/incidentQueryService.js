@@ -9,13 +9,13 @@ var config = require("./config");
     AWS.config.update({
         region: "eu-west-1"
     });
-    const dynamodb = new AWS.DynamoDB();
+    const dynamodb = new AWS.DynamoDB({correctClockSkew: true});
 
 
     incidentQueryService.GetAllIncidents = () => {
         return new Promise( function pr(resolve,reject) {
 
-            var docClient = new AWS.DynamoDB.DocumentClient();
+            var docClient = new AWS.DynamoDB.DocumentClient({correctClockSkew: true});
             var results = [];
 
             var params = {
@@ -43,7 +43,12 @@ var config = require("./config");
     incidentQueryService.GetIncidentsByLocation = (region) => {
         return new Promise( function pr(resolve,reject) {
 
-            var docClient = new AWS.DynamoDB.DocumentClient();
+            console.log("GetIncidentsByLocation() - " + region);
+
+            var date = new Date();
+            console.log("datetime - " + date);
+            
+            var docClient = new AWS.DynamoDB.DocumentClient({correctClockSkew: true});
             var results = [];
 
             var params = {
@@ -96,112 +101,5 @@ var config = require("./config");
 
         dynamodb.getItem(params, callback);
     }
-
-
-    // incidentQueryService.GetIncidentsByLocationREST_OLD = (location) => {
-    //     return new Promise( function pr(resolve,reject) {
-
-    //         // Convert queue format to BO format 
-    //         var results = [];
-
-    //         var client = new RestClient();
-    //         var args = {
-    //         headers: standardGetHeader()
-    //         };
-
-    //         var incidentQueryUri = config.incidentQueryUri.replace("{0}", location);
-    //         console.log("Query Uri: " + incidentQueryUri) + " header: " + args.headers.Authorization; 
-    //         client.get(incidentQueryUri, args, (data, response) => {
-    //             console.log("RAW BODY response from query by region: " + JSON.stringify(data));
-    //             results = data['rdfs:member'];
-    //             console.log("Retrived incidents: " + results);                
-
-    //             if (results && results.length > 0) {
-    //                 console.log("Total matches: " + results.length);
-
-    //                 var loadIncidentPromises = [];
-    //                 results.forEach((item) => {
-    //                     incidentUri = item['rdf:resource'].replace("localhost", config.incidentServiceHostname);
-    //                     loadIncidentPromises.push(loadIndividualIncident(incidentUri));
-    //                 })
-
-    //                 Promise.all(loadIncidentPromises).then(values => { 
-    //                     console.log(values); 
-    //                     resolve(values);
-    //                 });
-    //             }
-    //         }).on('error', function (err) {
-    //             console.log('something went wrong on the GET', err.request.options);
-    //             reject(err);
-    //         });
-    //     });
-    // }
-
-    // function loadIndividualIncident(incidentUri) {
-    //     return new Promise( function pr(resolve,reject) {
-    //         console.log("Load Item: " + incidentUri);
-
-    //         var client = new RestClient();
-    //         var args = {
-    //         headers: standardGetHeader()
-    //         };
-
-    //         client.get(incidentUri, args, (data, response) => {
-    //             console.log("Retrived incident: " + data);
-    //             var incidentDTO = mapBOToDTO(data);
-    //             resolve(incidentDTO);
-    //         });
-    //     });
-
-    // }
-
-
-
-    // function standardGetHeader() {
-         
-    //      var standardGetHeader = 
-    //         { 
-    //         "Accept": "application/json", 
-    //         "Authorization": config.basicAuthHeaderVal 
-    //         };
-
-    //     return standardGetHeader;
-    // }
-
-    // function mapBOToDTO(incidentBO) {
-    //     var dto =
-    //     {
-    //     "ID": incidentBO["spi:ControlNumber"],
-    //     "problemReport": incidentBO["spi:cstIncidentDetails"],
-    //     "incidentType": incidentBO["spi:cstIncidentType"],
-    //     "region": incidentBO["spi:cstIncidentLocation"],
-    //     "name":  incidentBO["spi:cstNameOfSubmitter"], 
-    //     "created":  convertDateToEngland(incidentBO["spi:CreatedDateTime"]) 
-    //     }
-
-    //     return dto;
-    // }
-    
-    // function convertDateToEngland(inputFormat) {
-    //     function pad(s) { return (s < 10) ? '0' + s : s; }
-    //     var d = new Date(inputFormat);
-    //     return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
-    // }
-        
-    // function mapModelToDTO(incidentModel) {
-    //     var dto =
-    //     {
-    //         "ID": incidentModel.IncidentID,
-    //         "problemReport": incidentModel.problemReport,
-    //         "incidentType": incidentModel.incidentType,
-    //         "region":incidentModel.Region,
-    //         "name":  incidentModel.nameOfSubmitter, 
-    //         "created": incidentModel.createdDateTime,
-    //         "status": incidentModel.status,
-    //     }
-
-    //     return dto;
-    // }    
-
 
 })(module.exports);
