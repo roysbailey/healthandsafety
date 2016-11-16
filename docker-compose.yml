@@ -1,0 +1,44 @@
+# export APP_ENV=dev    # see .env file for default values for the environment variables.
+# Run docker-compose build
+# Run docker-compose up
+# Run docker-compose up
+# Run docker-compose stop
+# Run docker-compose start
+# Run docker-compose down
+    
+version: "2"
+ 
+services:
+    has-web1:
+      container_name: has-web1
+      image: monsteruk/has-webapp
+      build: 
+        context: .
+        dockerfile: .docker/${APP_ENV}.dockerfile
+      ports:
+      - "8080:3000"
+      volumes:
+        - .:/var/www
+      working_dir: /var/www
+      env_file:
+        - ./.docker/env/dev.webapp.env
+      networks:
+        - has-isolated_network
+
+    has-worker1:
+      container_name: has-worker1
+      image: monsteruk/has-webworker
+      build: 
+        context: ../DIOHandS.Background
+        dockerfile: .docker/${APP_ENV}.dockerfile
+      volumes:
+        - ../DIOHandS.Background:/var/www
+      working_dir: /var/www
+      env_file:
+        - ../DIOHandS.Background/.docker/env/dev.webworker.env
+      networks:
+        - has-isolated_network
+
+networks:
+    has-isolated_network:
+      driver: bridge
