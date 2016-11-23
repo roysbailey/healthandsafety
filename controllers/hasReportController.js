@@ -2,7 +2,7 @@
 
     var config = require('../services/config');
     var incidentQueryService = require("../services/incidentQueryService");
-    var incidentSubmissionService = require("../services/incidentSubmissionService");
+    var incidentSubmissionService = require("../services/incidentSubmissionServiceFactory").instance;
     IncidentModel = require('../models/IncidentModel');
 
   hasReportController.init = function (app) {
