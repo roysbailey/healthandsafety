@@ -1,7 +1,6 @@
 # export APP_ENV=dev    # see .env file for default values for the environment variables.
 # Run docker-compose build
 # Run docker-compose up
-# Run docker-compose up
 # Run docker-compose stop
 # Run docker-compose start
 # Run docker-compose down
@@ -19,9 +18,21 @@ services:
       - "8080:3000"
       volumes:
         - .:/var/www
+      links:
+        - "postgres:has-postgres"        
       working_dir: /var/www
       env_file:
         - ./.docker/env/dev.webapp.env
+      networks:
+        - has-isolated_network
+
+    postgres:
+      container_name: has-postgres
+      image: monsteruk/has-postgres
+      ports:
+      - "5432:5432"
+      env_file:
+        - ./.docker/env/dev.postgress.env
       networks:
         - has-isolated_network
 
@@ -36,6 +47,8 @@ services:
       working_dir: /var/www
       env_file:
         - ../DIOHandS.Background/.docker/env/dev.webworker.env
+      links:
+        - "postgres:has-postgres"        
       networks:
         - has-isolated_network
 

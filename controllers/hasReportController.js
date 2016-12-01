@@ -1,8 +1,8 @@
 (function (hasReportController) {
 
     var config = require('../services/config');
-    var incidentQueryService = require("../services/incidentQueryService");
-    var incidentSubmissionService = require("../services/incidentSubmissionService");
+    var incidentReadViewRepo = require("../services/incidentReadViewRepoFactory").instance;
+    var incidentSubmissionService = require("../services/incidentSubmissionServiceFactory").instance;
     IncidentModel = require('../models/IncidentModel');
 
   hasReportController.init = function (app) {
@@ -53,7 +53,7 @@
     app.post("/admin/submissions", function (req, res) {
         console.log("region selected: " + req.body.region);
 
-        Promise.all([incidentQueryService.getLastPollDate(), incidentQueryService.GetIncidentsByLocation(req.body.region)])
+        Promise.all([incidentReadViewRepo.getLastPollDate(), incidentReadViewRepo.GetIncidentsByLocation(req.body.region)])
         .then(allResults => {
             console.log(allResults);
             var lastReadViewUpdateDateTime = allResults[0]; 

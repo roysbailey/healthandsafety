@@ -1,7 +1,7 @@
 var azureStorage = require('azure-storage');
 
-(function (incidentSubmissionService) {
-    incidentSubmissionService.submitIncidentForProcessing = (incident) => {
+(function (incidentSubmissionCloudService) {
+    incidentSubmissionCloudService.submitIncidentForProcessing = (incident) => {
         return new Promise( function pr(resolve,reject) {
             dumpEnv();
             

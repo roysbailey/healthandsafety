@@ -18,6 +18,9 @@
     "express": "~3.4.8",
     "install": "^0.8.1",
     "node-rest-client": "^2.0.1",
+    "pg": "^6.1.0",
+    "pg-promise": "^5.4.3",
+    "underscore": "^1.8.3",
     "vash": "~0.7.7"
   },
   "devDependencies": {

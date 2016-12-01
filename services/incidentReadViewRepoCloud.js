@@ -1,6 +1,6 @@
 var config = require("./config");
 
-(function (incidentQueryService) {
+(function (incidentReadViewRepoCloud) {
 
 //    var RestClient = require('node-rest-client').Client;
 
@@ -12,7 +12,7 @@ var config = require("./config");
     const dynamodb = new AWS.DynamoDB({correctClockSkew: true});
 
 
-    incidentQueryService.GetAllIncidents = () => {
+    incidentReadViewRepoCloud.GetAllIncidents = () => {
         return new Promise( function pr(resolve,reject) {
 
             var docClient = new AWS.DynamoDB.DocumentClient({correctClockSkew: true});
@@ -40,7 +40,7 @@ var config = require("./config");
         });
     }
 
-    incidentQueryService.GetIncidentsByLocation = (region) => {
+    incidentReadViewRepoCloud.GetIncidentsByLocation = (region) => {
         return new Promise( function pr(resolve,reject) {
 
             console.log("GetIncidentsByLocation() - " + region);
@@ -80,7 +80,7 @@ var config = require("./config");
         });
     }
 
-    incidentQueryService.getLastPollDate = () => {
+    incidentReadViewRepoCloud.getLastPollDate = () => {
         return new Promise( function pr(resolve,reject) {
             getItem("HealthAndSafetyBookMark", "System", "HealthAndSafety", (error, data) => {
                 if (error)

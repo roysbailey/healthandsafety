@@ -48,6 +48,6 @@ server.listen(port);
 
 
 function dumpEnv() {
-    console.log("Environemnt...");
-    console.log(process.env);
+    // console.log("Environemnt...");
+    // console.log(process.env);
 }

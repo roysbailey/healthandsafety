@@ -1,8 +1,8 @@
 var https = require("https");
 require('array.prototype.find').shim();
 var os = require("os");
-var incidentQueryService = require("../../services/incidentQueryService");
-var incidentSubmissionService = require("../../services/incidentSubmissionService");
+var incidentReadViewRepo = require("../../services/incidentReadViewRepoFactory").instance;
+var incidentSubmissionService = require("../../services/incidentSubmissionServiceFactory").instance;
 IncidentModel = require('../../models/IncidentModel');
 
 
@@ -50,7 +50,7 @@ IncidentModel = require('../../models/IncidentModel');
 
     app.get("/api/hasincidents", function (req, resp) {
     
-      incidentQueryService.GetAllIncidents()
+      incidentReadViewRepo.GetAllIncidents()
       .then(data => {
         resp.set("Content-Type", "application/json");
 

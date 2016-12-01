@@ -6,6 +6,7 @@ npm-debug.log*
 # Docker environment
 *.env
 .docker/env
+.docker/cloud
 
 # Runtime data
 pids
